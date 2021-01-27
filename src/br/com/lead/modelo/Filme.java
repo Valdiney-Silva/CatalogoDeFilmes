@@ -7,43 +7,49 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity(name="filme")
 @Table(name="filme")
 public class Filme implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7950490320492982513L;
 
-	
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-	private Long id;
+	private int id;
 	
 	@Column (name ="filme", nullable = false)
 	private String nome;
-	
-	@Column (name ="genero", nullable = false)
 	private String genero;
+	private int ano;
 	
-	@Column (name ="ano", nullable = false)
-	private Long ano;
+	@ManyToOne
+	private Autor autor;
 	
-	public Filme() {}
+	public Autor getAutor() {
+		return autor;
+	}
 	
-	public Filme(String nome, String genero, Long ano) {
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
+
+	public Filme() {
+		
+	}
+	
+	public Filme(String nome, String genero, int ano) {
 		this.nome = nome;
 		this.genero = genero;
 		this.ano = ano;
 	}
 	
-	public Long getId() {
+	public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 	
@@ -55,7 +61,7 @@ public class Filme implements Serializable {
 		return genero;
 	}
 	
-	public Long getAno() {
+	public int getAno() {
 		return ano;
 	}
 }
